@@ -10,8 +10,15 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -48,6 +55,27 @@ public class BadIOGUI {
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         canvas.add(panel, BorderLayout.CENTER);
         panel.add(write);
+        final JButton read = new JButton("Read");
+        panel.add(read, BoxLayout.X_AXIS);
+        read.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    final BufferedReader buffer = new BufferedReader(new FileReader(PATH));
+                    String s;
+                    while((s = buffer.readLine()) != null){
+                        System.out.println(s);
+                    }
+                }
+                catch(Exception ex){
+
+                }
+                
+            }
+
+        });
+
         /*
          * Handlers
          */
